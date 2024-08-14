@@ -27,7 +27,7 @@ class AxiosHelper {
 
 const config = (requestConfig: AxiosRequestConfig = {}) => {
     requestConfig.baseURL = `http://localhost:8080/api`;
-
+    requestConfig.headers = {"Content-Type": "application/json"}
     return requestConfig;
 };
 

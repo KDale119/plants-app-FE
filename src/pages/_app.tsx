@@ -28,8 +28,8 @@ export default function App({ Component, pageProps }: AppProps) {
                                 </Link>
                             </NavbarItem>
                         </NavbarContent>
-                        <NavbarBrand  className="hidden sm:flex gap-4 justify-center" justify="center">
-                            <p className="font-bold text-inherit">Kayla's Garden</p>
+                        <NavbarBrand  className="hidden sm:flex gap-4 justify-center">
+                            <p className="font-bold text-inherit">Kayla&apos;s Garden</p>
                         </NavbarBrand>
                         <NavbarContent justify="end">
                             <NavbarItem className="hidden lg:flex">

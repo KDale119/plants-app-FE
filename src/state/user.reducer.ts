@@ -4,7 +4,7 @@ import axios, { axiosCatch } from "./axios-utils";
 
 
 const initialState = {
-    currentUser: undefined as User,
+    currentUser: undefined as unknown as User,
     loading: false
 };
 
@@ -35,4 +35,5 @@ export const UserSlice = createSlice({
 });
 
 export default UserSlice.reducer;
-export const currentUser = (state: any): User[] => state.user.currentUser;
+export const selectCurrentUser = (state: any): User => state.user.currentUser;
+export const selectUserLoading = (state: any): boolean => state.user.loading;
