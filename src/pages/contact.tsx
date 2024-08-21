@@ -11,7 +11,6 @@ export default function Contact() {
                 <h4 className="text-lg">kdale@mail.mccneb.edu</h4>
                 <h4 className="text-lg">(402)-981-3107</h4>
                 <div className="mt-4 flex items-center justify-center space-x-4">
-
                     <Link href="https://www.linkedin.com/in/kayla-dale-336521253/" target="_blank"
                           rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faLinkedin} className="text-white text-5xl"/>
