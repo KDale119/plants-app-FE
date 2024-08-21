@@ -1,10 +1,12 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NextUIProvider, Link, Button, Divider} from "@nextui-org/react";
+import { NextUIProvider, Divider} from "@nextui-org/react";
 import getStore, {persistor} from "@/state/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
+
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
 
 const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
@@ -12,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return(
         <Provider store={store}>
             <PersistGate persistor={persistor}>
+
                 <QueryClientProvider client={queryClient}>
                     <NextUIProvider>
                         <main className="dark text-foreground bg-background">
@@ -51,7 +54,13 @@ export default function App({ Component, pageProps }: AppProps) {
                           <Component {...pageProps} />
                         </main>
                     </NextUIProvider>
-                </QueryClientProvider>
+                <NextUIProvider>
+                    <main className="dark text-foreground bg-background">
+                        <Nav />
+                        <Divider className="my-4 h-4 bg-green-500" />
+                      <Component {...pageProps} />
+                    </main>
+                </NextUIProvider>
             </PersistGate>
         </Provider>);
 }
