@@ -12,7 +12,6 @@ export default function Viewing(){
         const resp: AxiosResponse <Plant> = await axios.get(`http://localhost:8080/api/plants/external/${apiId}`)
         return resp.data
     }
-
     const { apiId} = router.query as unknown as {
         apiId: number
     }
