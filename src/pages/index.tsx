@@ -6,7 +6,6 @@ import {Key, useEffect} from "react";
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import {useRouter} from "next/router";
-import {Link} from "@nextui-org/react";
 
 export default function Home() {
     const currentUser = useAppSelector(selectCurrentUser);
@@ -28,6 +27,14 @@ export default function Home() {
         }
     }, [currentUser, router]);
 
+    const passingId = (d: any) => {
+        router.push({
+            pathname: "/viewing",
+            query: {
+                apiId: d.apiId
+            },
+        });
+    };
     return (
         <>
             <h1 className="text-center text-xl font-bold mb-6">
@@ -41,15 +48,13 @@ export default function Home() {
                       <div key={d.apiId} className="w-full sm:w-1/2 md:w-1/3 p-4">
                           <div className="p-2 text-center rounded-md">
                               <div className="flex justify-center mb-4">
-                                  <Link href="/viewing">
-                                      <Image
-                                          src={d.image}
-                                          alt={d.plantName}
-                                          width={300}
-                                          height={300}
-                                          className="object-cover"
-                                      />
-                                  </Link>
+                                  <Image src={d.image}
+                                         alt={d.plantName}
+                                         width={300}
+                                         height={300}
+                                         className="object-cover"
+                                         onClick={() => passingId(d)}
+                                  />
                               </div>
                               <p className="text-lg font-medium">{d.plantName}</p>
                           </div>
