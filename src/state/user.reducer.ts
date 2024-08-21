@@ -12,6 +12,10 @@ export const createUser = createAsyncThunk('user/create_user', async (user: User
     return axios.post('/users', JSON.stringify(user)).catch(axiosCatch);
 });
 
+export const updateUser = createAsyncThunk('user/update_user', async (user: User) => {
+    return axios.put(`/users/${user.userEmail}`, JSON.stringify(user)).catch(axiosCatch);
+});
+
 export const loginUser = createAsyncThunk('user/login', async (login: Pick<User, "userEmail" | "userPassword">) => {
     return axios.post('/users/login', JSON.stringify(login)).catch(axiosCatch);
 });
@@ -22,14 +26,14 @@ export const UserSlice = createSlice({
     reducers: {},
     extraReducers (builder) {
         builder
-            .addMatcher(isFulfilled(createUser, loginUser), (state, action) => {
+            .addMatcher(isFulfilled(createUser, loginUser, updateUser), (state, action) => {
                 return {
                     ...state,
                     currentUser: action.payload.data,
                     loading: false,
                 };
             })
-            .addMatcher(isPending(createUser, loginUser), (state) => {
+            .addMatcher(isPending(createUser, loginUser, updateUser), (state) => {
                 return {
                     ...state,
                     loading: true,

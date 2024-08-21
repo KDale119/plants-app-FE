@@ -20,6 +20,15 @@ const store = configureStore({
         }),
 });
 
+export async function signOut() {
+    await storage.removeItem('persist:plant-app');
+    persistor.purge().then(() => {
+        persistor.flush().then(() => {
+            persistor.pause();
+        });
+    });
+}
+
 const getStore = () => store;
 
 export type IRootState = ReturnType<typeof store.getState>;
