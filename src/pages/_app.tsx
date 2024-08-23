@@ -1,10 +1,11 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NextUIProvider, Link, Button, Divider} from "@nextui-org/react";
+import {NextUIProvider, Divider, Navbar, NavbarContent, NavbarItem, Link, NavbarBrand, Button} from "@nextui-org/react";
 import getStore, {persistor} from "@/state/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
 
 const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
