@@ -16,12 +16,12 @@ export default function Nav() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" href="/about">
                         About
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" href="/contact">
                         Contact
                     </Link>
                 </NavbarItem>
@@ -43,7 +43,7 @@ export default function Nav() {
                     </>}
                 {currentUser &&
                     <>
-                        <NavbarItem className="hidden lg:flex">
+                        <NavbarItem className="lg:flex">
                             <Avatar as={Link} href="/profile"
                                     icon={<AvatarIcon />}
                                     classNames={{
