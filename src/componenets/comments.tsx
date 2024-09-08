@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import {useAppSelector} from "@/state/store";
 import {selectCurrentUser} from "@/state/user.reducer";
@@ -27,7 +27,7 @@ function Comments({ apiId }: CommentsProps) {
         return response.data;
     }
 
-    const handleCommentSubmit = async () => {
+    const submitComment = async () => {
         try {
             const response = await axios.post(`http://localhost:8080/api/comments/${currentUser.userName}/${apiId}`, {
                 comment: newComment,
@@ -39,19 +39,37 @@ function Comments({ apiId }: CommentsProps) {
             setError('Failed to submit comment');
         }
         await refetch();
-    };
+    }
+
+    const deleteComment = async (commentId: number) => {
+        try {
+            await axios.delete(`http://localhost:8080/api/comments/${commentId}`);
+            await refetch();
+        } catch (error) {
+            setError('Failed to delete comment');
+        }
+    }
 
     return (
         <div className="p-4 rounded-lg">
             <h3 className="text-xl font-semibold text-gray-800">Comments</h3><br/><br/>
             <div className="space-y-4">
                 {data?.map((userComment: any) => (
-                    <h4 key={userComment.commentId} className="border-b pb-2">
+                    <div key={userComment.commentId} className="border-b pb-2">
                         <p className="text-gray-700">
                             <strong className="text-gray-900">{userComment.username}:</strong> <br/>
                             {userComment.comment}
                         </p><br/>
-                    </h4>
+                        {currentUser.userName === userComment.username && (
+                            <Button
+                                onClick={() => deleteComment(userComment.commentId)}
+                                className="mt-2 text-white p-2 rounded-md hover:bg-red-600"
+                                size="sm"
+                            >
+                                Delete
+                            </Button>
+                        )}
+                    </div>
                 ))}
             </div>
 
@@ -63,7 +81,7 @@ function Comments({ apiId }: CommentsProps) {
             className="w-full p-2 border rounded-md text-white"
         />
                 <Button
-                    onClick={handleCommentSubmit}
+                    onClick={submitComment}
                     className="mt-2 text-white p-2 rounded-md hover:bg-blue-600"
                 >
                     Submit
