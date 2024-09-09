@@ -9,6 +9,11 @@ import { faHeart, faHeart as faHeartRegular } from "@fortawesome/free-solid-svg-
 import { useAppSelector } from "@/state/store";
 import { selectCurrentUser } from "@/state/user.reducer";
 import { Wishlist } from "@/models/wishlist.model";
+import dynamic from "next/dynamic";
+
+const MapComponent = dynamic(() => import('../components/map'), {
+    ssr: false
+});
 
 export default function Viewing() {
     const currentUser = useAppSelector(selectCurrentUser);
@@ -100,6 +105,7 @@ export default function Viewing() {
                     </span>
                 </p>
             </div>
+                <MapComponent apiId={apiId}/>
         </div>
     );
 }

@@ -1,9 +1,9 @@
 import {useAppSelector} from "@/state/store";
 import {selectCurrentUser} from "@/state/user.reducer";
 import {Button, Link} from "@nextui-org/react";
-import UpdateProfileModal from "@/componenets/update-profile-modal";
+import UpdateProfileModal from "@/components/update-profile-modal";
 import {useState} from "react";
-import UpdatePasswordModal from "@/componenets/update-password-modal";
+import UpdatePasswordModal from "@/components/update-password-modal";
 import {useRouter} from "next/router";
 
 export default function Profile() {

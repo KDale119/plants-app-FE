@@ -5,7 +5,7 @@ import getStore, {persistor} from "@/state/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import Nav from "@/componenets/nav";
+import Nav from "@/components/nav";
 
 
 const queryClient = new QueryClient();
