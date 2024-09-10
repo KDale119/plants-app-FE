@@ -9,6 +9,7 @@ import { faHeart, faHeart as faHeartRegular } from "@fortawesome/free-solid-svg-
 import { useAppSelector } from "@/state/store";
 import { selectCurrentUser } from "@/state/user.reducer";
 import { Wishlist } from "@/models/wishlist.model";
+import Comments from "@/componenets/comments";
 
 export default function Viewing() {
     const currentUser = useAppSelector(selectCurrentUser);
@@ -99,6 +100,7 @@ export default function Viewing() {
                         )}
                     </span>
                 </p>
+                <Comments apiId={data?.apiId} />
             </div>
         </div>
     );

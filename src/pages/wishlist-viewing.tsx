@@ -9,6 +9,7 @@ import { faHeart, faHeart as faHeartRegular } from "@fortawesome/free-solid-svg-
 import { useAppSelector } from "@/state/store";
 import { selectCurrentUser } from "@/state/user.reducer";
 import {Button, Link} from "@nextui-org/react";
+import Comments from "@/componenets/comments";
 
 export default function Viewing() {
     const currentUser = useAppSelector(selectCurrentUser);
@@ -67,6 +68,7 @@ export default function Viewing() {
                 </p>
                 <Button className="bg-black mt-6"><Link href="/wishlist" className="text-white-200">Back to your wishlist</Link></Button>
             </div>
+            <Comments apiId={data?.apiId} />
         </div>
     );
 }
