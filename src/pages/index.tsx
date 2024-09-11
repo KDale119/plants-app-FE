@@ -62,8 +62,8 @@ export default function Home() {
         <>
             <h1 className="text-center text-xl font-bold mb-6">
                 {currentUser
-                    ? `Welcome ${currentUser.firstName}, you are logged in!`
-                    : 'Welcome, you are not currently logged in!'}
+                    ? `Welcome ${currentUser.firstName}`
+                    : ''}
             </h1>
             <div className="container mx-auto px-4 mb-6 relative">
                 <input

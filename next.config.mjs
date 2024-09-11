@@ -10,6 +10,14 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    config.module.rules.push({
+      test: /\.geojson$/,
+      use: 'json-loader',
+    });
+
+    return config;
+  },
 };
 
 export default nextConfig;

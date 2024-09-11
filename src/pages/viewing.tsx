@@ -9,7 +9,12 @@ import { faHeart, faHeart as faHeartRegular } from "@fortawesome/free-solid-svg-
 import { useAppSelector } from "@/state/store";
 import { selectCurrentUser } from "@/state/user.reducer";
 import { Wishlist } from "@/models/wishlist.model";
-import Comments from "@/componenets/comments";
+import dynamic from "next/dynamic";
+import Comments from "@/components/comments";
+
+const MapComponent = dynamic(() => import('../components/map'), {
+    ssr: false
+});
 
 export default function Viewing() {
     const currentUser = useAppSelector(selectCurrentUser);
@@ -100,8 +105,10 @@ export default function Viewing() {
                         )}
                     </span>
                 </p>
-                <Comments apiId={data?.apiId} />
+                <Comments apiId={apiId}/>
             </div>
+
+                <MapComponent apiId={apiId}/>
         </div>
     );
 }
