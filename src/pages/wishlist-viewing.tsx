@@ -67,6 +67,7 @@ export default function Viewing() {
                 </p>
                 <Button className="bg-black mt-6"><Link href="/wishlist" className="text-white-200">Back to your wishlist</Link></Button>
             </div>
+            <Comments apiId={data?.apiId} />
         </div>
     );
 }
