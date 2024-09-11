@@ -41,7 +41,7 @@ export default function Viewing() {
     };
 
     return (
-        <div className="flex flex-row items-start justify-center min-h-screen space-x-8 p-4">
+        <div className="flex flex-col items-center justify-center min-h-screen">
             <div className="w-full max-w-md bg-gray-200 p-6 rounded-lg shadow-lg text-center text-xl text-black">
                 <h1 className="text-2xl mb-4">{currentUser.userName}'s Wishlist</h1>
                 <Image
@@ -71,9 +71,10 @@ export default function Viewing() {
                 <Button className="bg-black mt-6">
                     <Link href="/wishlist" className="text-white-200">Back to your wishlist</Link>
                 </Button>
+                <Comments apiId={apiId}/>
             </div>
-            <Comments apiId={apiId}/>
             <MapComponent apiId={apiId}/>
+
         </div>
 
     );
