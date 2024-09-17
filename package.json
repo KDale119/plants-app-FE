@@ -21,6 +21,7 @@
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
+    "react-form-wizard-component": "^0.2.7",
     "react-redux": "^8.0.2",
     "redux-persist": "^6.0.0"
   },
