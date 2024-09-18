@@ -20,7 +20,7 @@ export default function Viewing() {
     const [isInWishlist, setIsInWishlist] = useState(true);
 
     const getPlantByApiId = async () => {
-        const resp: AxiosResponse<Plant> = await axios.get(`http://localhost:8080/api/plants/external/${apiId}`);
+        const resp: AxiosResponse<Plant> = await axios.get(`http://18.188.80.135:8080/api/plants/external/${apiId}`);
         return resp.data;
     };
 
@@ -32,7 +32,7 @@ export default function Viewing() {
     const wishlistToggle = async () => {
         try {
             if (isInWishlist) {
-                await axios.delete(`http://localhost:8080/api/wishlist/${currentUser.userEmail}/${data?.apiId}`);
+                await axios.delete(`http://18.188.80.135:8080/api/wishlist/${currentUser.userEmail}/${data?.apiId}`);
             }
             setIsInWishlist(!isInWishlist);
         } catch (error) {

@@ -19,7 +19,7 @@ export default function Home(){
     })
 
     async function getPlants(){
-        const response= await axios.get(`http://localhost:8080/api/wishlist/${currentUser.userEmail}`);
+        const response= await axios.get(`http://18.188.80.135:8080/api/wishlist/${currentUser.userEmail}`);
         return response.data;
     }
 
