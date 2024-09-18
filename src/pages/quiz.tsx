@@ -14,7 +14,7 @@ export default function Quiz() {
     return (
         <>
             <h2>Welcome to our Plant matching quiz!</h2>
-            <h3>Feel free to leave any questions you want blank, they won't be included in the matching algorithm.</h3>
+            <h3>Feel free to leave any questions you want blank, they won&apos;t be included in the matching algorithm.</h3>
             <FormWizard color="#55BC79">
                 <FormWizard.TabContent title="Edible?" icon="fa fa-plate-wheat">
                     <h3>Do you want to be able to eat your plant?</h3>

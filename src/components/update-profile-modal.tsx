@@ -41,7 +41,7 @@ export default function UpdateProfileModal(props: UpdateProfileModalProps) {
                 userPassword: props.currentUser.userPassword
             });
         }
-    }, [props.open])
+    }, [props])
 
     async function updateUserOnClick() {
         let response = null;

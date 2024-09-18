@@ -12,7 +12,7 @@ import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 
 export type UpdateProfileModalProps = {
     open: boolean;
-    setOpen: (boolean) => void;
+    setOpen: (open: boolean) => void;
     currentUser: User;
 }
 
@@ -30,7 +30,7 @@ export default function UpdatePasswordModal(props: UpdateProfileModalProps) {
 
     const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
 
-    const onFieldChange = (event:  ChangeEventHandler<HTMLInputElement> | undefined) => {
+    const onFieldChange = (event:  any | undefined) => {
         setForm({...form, [event?.target.id]: event?.target.value})
     }
 

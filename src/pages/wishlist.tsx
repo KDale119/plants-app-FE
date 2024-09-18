@@ -34,7 +34,7 @@ export default function Home(){
     return(
         <>
             <div className="container mx-auto px-4">
-                <h1 className="text-2xl">{currentUser.userName}'s Wishlist</h1>
+                <h1 className="text-2xl">{currentUser.userName}&apos;s Wishlist</h1>
                 <div className="flex flex-wrap-m-4">
                     {data?.map((d:{
                         apiId:Key|null|undefined;
