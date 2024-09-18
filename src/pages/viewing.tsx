@@ -25,7 +25,7 @@ export default function Viewing() {
     const [itemId, setItemId] = useState(null);
 
     const getPlantByApiId = async () => {
-        const resp: AxiosResponse<Plant> = await axios.get(`http://localhost:8080/api/plants/external/${apiId}`);
+        const resp: AxiosResponse<Plant> = await axios.get(`http://18.188.80.135:8080/api/plants/external/${apiId}`);
         return resp.data;
     };
 
@@ -37,7 +37,7 @@ export default function Viewing() {
     useEffect(() => {
         const getWishlist = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/wishlist/${currentUser.userEmail}`);
+                const response = await axios.get(`http://18.188.80.135:8080/api/wishlist/${currentUser.userEmail}`);
                 const wishlist = response.data;
                 setWishlist(wishlist);
 
@@ -66,10 +66,10 @@ export default function Viewing() {
     const wishlistToggle = async () => {
         try {
             if (isInWishlist) {
-                await axios.delete(`http://localhost:8080/api/wishlist/${currentUser.userEmail}/${data?.apiId}`);
+                await axios.delete(`http://18.188.80.135:8080/api/wishlist/${currentUser.userEmail}/${data?.apiId}`);
                 setIsInWishlist(false)
             } else {
-                await axios.post(`http://localhost:8080/api/wishlist`, newWishlistItem);
+                await axios.post(`http://18.188.80.135:8080/api/wishlist`, newWishlistItem);
                 setIsInWishlist(true)
             }
             setIsInWishlist(!isInWishlist);

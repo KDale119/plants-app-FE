@@ -22,14 +22,14 @@ function Comments({ apiId }: CommentsProps) {
     })
 
     async function getComments() {
-        const response = await axios.get(`http://localhost:8080/api/comments/${apiId}`);
+        const response = await axios.get(`http://18.188.80.135:8080/api/comments/${apiId}`);
         setComments(response.data)
         return response.data;
     }
 
     const submitComment = async () => {
         try {
-            const response = await axios.post(`http://localhost:8080/api/comments/${currentUser.userName}/${apiId}`, {
+            const response = await axios.post(`http://18.188.80.135:8080/api/comments/${currentUser.userName}/${apiId}`, {
                 comment: newComment,
                 username: currentUser.userName,
             });
@@ -43,7 +43,7 @@ function Comments({ apiId }: CommentsProps) {
 
     const deleteComment = async (commentId: number) => {
         try {
-            await axios.delete(`http://localhost:8080/api/comments/${commentId}`);
+            await axios.delete(`http://18.188.80.135:8080/api/comments/${commentId}`);
             await refetch();
         } catch (error) {
             setError('Failed to delete comment');

@@ -22,7 +22,7 @@ const MapComponent = ({ apiId }: MapProps) => {
     useEffect(() => {
         const fetchPlantData = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/plants/external/${apiId}`);
+                const response = await fetch(`http://18.188.80.135:8080/api/plants/external/${apiId}`);
                 const data = await response.json();
 
                 const origin = data.origin;

@@ -20,7 +20,7 @@ export default function Home() {
     })
 
     async function getPlants() {
-        const response = await axios.get(`http://localhost:8080/api/plants`);
+        const response = await axios.get(`http://18.188.80.135:8080/api/plants`);
         return response.data;
     }
 
