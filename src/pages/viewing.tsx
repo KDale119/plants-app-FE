@@ -1,16 +1,17 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios, { AxiosResponse } from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { Plant } from "@/models/plant.model";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faHeart as faHeartRegular } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector } from "@/state/store";
 import { selectCurrentUser } from "@/state/user.reducer";
 import { Wishlist } from "@/models/wishlist.model";
 import dynamic from "next/dynamic";
 import Comments from "@/components/comments";
+import {useSearchParams} from "next/navigation";
 
 const MapComponent = dynamic(() => import('../components/map'), {
     ssr: false
@@ -21,8 +22,8 @@ export default function Viewing() {
     const router = useRouter();
     const { apiId } = router.query as unknown as { apiId: number };
     const [isInWishlist, setIsInWishlist] = useState(false);
-    const [wishlist, setWishlist] = useState([]);
-    const [itemId, setItemId] = useState(null);
+    const [wishlist, setWishlist] = useState<Wishlist[]>([]);
+    const [itemId, setItemId] = useState<number | null>(null);
 
     const getPlantByApiId = async () => {
         const resp: AxiosResponse<Plant> = await axios.get(`http://18.188.80.135:8080/api/plants/external/${apiId}`);
@@ -34,21 +35,23 @@ export default function Viewing() {
         queryFn: getPlantByApiId,
     });
 
+    const searchParams = useSearchParams();
     useEffect(() => {
         const getWishlist = async () => {
             try {
-                const response = await axios.get(`http://18.188.80.135:8080/api/wishlist/${currentUser.userEmail}`);
-                const wishlist = response.data;
-                setWishlist(wishlist);
+                if (apiId) {
+                    const response = await axios.get(`http://18.188.80.135:8080/api/wishlist/${currentUser.userEmail}`);
+                    const wishlist = response.data;
+                    setWishlist(wishlist);
 
-                const itemId = data?.apiId;
-                const item = wishlist.find((item: { id: number | undefined; }) => item.id === itemId);
+                    const item = wishlist.find((item: { id: number | undefined; }) => item.id === Number(searchParams.get('apiId')));
 
-                if (item) {
-                    setItemId(item.id);
-                    setIsInWishlist(true);
-                } else {
-                    setIsInWishlist(false)
+                    if (item) {
+                        setItemId(item.id);
+                        setIsInWishlist(true);
+                    } else {
+                        setIsInWishlist(false)
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching wishlist:', error);
@@ -56,7 +59,9 @@ export default function Viewing() {
         };
 
         getWishlist();
-    }, [currentUser.userEmail, data]);
+    }, [currentUser.userEmail, data, apiId]);
+
+
 
     const newWishlistItem: Wishlist = {
         emailAddress: currentUser.userEmail,
@@ -67,12 +72,11 @@ export default function Viewing() {
         try {
             if (isInWishlist) {
                 await axios.delete(`http://18.188.80.135:8080/api/wishlist/${currentUser.userEmail}/${data?.apiId}`);
-                setIsInWishlist(false)
             } else {
                 await axios.post(`http://18.188.80.135:8080/api/wishlist`, newWishlistItem);
-                setIsInWishlist(true)
             }
-            setIsInWishlist(!isInWishlist);
+
+            setIsInWishlist((prev) => !prev);
         } catch (error) {
             console.error('Error updating wishlist:', error);
         }
@@ -89,26 +93,26 @@ export default function Viewing() {
                     className="object-cover mb-4 rounded-full"
                 />
                 <p className="text-xl font-bold mb-2">{data?.plantName}</p>
-                <p className="mb-1"> Scientific name: {data?.scientificName}</p>
+                <p className="mb-1">Scientific name: {data?.scientificName}</p>
                 <p className="mb-1">Origin: {data?.origin}</p>
                 <p className="mb-1">Type: {data?.type}</p>
                 <p className="mb-1">Measurements: {data?.dimension}</p>
-                <p className="mb-1"> Watering needs: {data?.plantWatering}</p>
+                <p className="mb-1">Watering needs: {data?.plantWatering}</p>
                 <p className="mb-1">Sunlight needs: {data?.plantSunlight}</p>
                 <p className="mb-1">Propagation: {data?.propagation}</p>
-                <p className="mt-2">Add to Wishlist?
+                <p className="mt-2">
+                    Add to Wishlist?
                     <span onClick={wishlistToggle} className="cursor-pointer mt-6 ml-4">
-                        {isInWishlist ? (
-                            <FontAwesomeIcon icon={faHeart} className="text-black text-2xl" />
-                        ) : (
-                            <FontAwesomeIcon icon={faHeartRegular} className="text-white text-2xl" />
-                        )}
+                        <FontAwesomeIcon
+                            icon={faHeart}
+                            className={`text-2xl ${isInWishlist ? 'text-black' : 'text-white'}`}
+                        />
                     </span>
                 </p>
                 <Comments apiId={apiId}/>
             </div>
 
-                <MapComponent apiId={apiId}/>
+            <MapComponent apiId={apiId}/>
         </div>
     );
 }
