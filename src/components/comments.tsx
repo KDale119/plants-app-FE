@@ -53,7 +53,7 @@ function Comments({ apiId }: CommentsProps) {
     return (
         <div className="p-4 rounded-lg">
             <h3 className="text-xl font-semibold text-gray-800">Comments</h3><br/><br/>
-            <div className="space-y-4">
+            <div className="space-y-4 border-green-500 border-4, rounded-xl">
                 {data?.map((userComment: any) => (
                     <div key={userComment.commentId} className="border-b pb-2">
                         <p className="text-gray-700">

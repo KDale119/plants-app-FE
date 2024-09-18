@@ -56,7 +56,7 @@ export default function Viewing() {
         };
 
         getWishlist();
-    }, [currentUser.userEmail]);
+    }, [currentUser.userEmail, data]);
 
     const newWishlistItem: Wishlist = {
         emailAddress: currentUser.userEmail,

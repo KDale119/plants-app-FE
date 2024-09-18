@@ -20,16 +20,16 @@ export default function About() {
                     </div>
                     <div className="flex-1 text-white-700 leading-relaxed max-w-md">
                         <p>
-                            Hi, I'm Kayla Dale, and I’ve been thriving as a Technical Specialist at Mutual of Omaha
+                            Hi, I&apos;m Kayla Dale, and I&apos;ve been thriving as a Technical Specialist at Mutual of Omaha
                             since coming
-                            into the role in April this year. While working here, I’ve had the opportunity
+                            into the role in April this year. While working here, I&apos;ve had the opportunity
                             to apply and expand my skills in various ways. However, the highlight of my journey was
                             developing this Next.js
                             application with a Java CRUD backend during my time in code school. This project was a
                             significant
                             milestone in my learning experience, showcasing my ability to build and integrate complex
                             systems.
-                            I’m deeply grateful for the solid foundation that code school provided, which has been
+                            I&apos;m deeply grateful for the solid foundation that code school provided, which has been
                             instrumental
                             in my professional growth and success.
                         </p>

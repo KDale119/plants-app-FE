@@ -43,7 +43,7 @@ export default function Viewing() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
             <div className="w-full max-w-md bg-gray-200 p-6 rounded-lg shadow-lg text-center text-xl text-black">
-                <h1 className="text-2xl mb-4">{currentUser.userName}'s Wishlist</h1>
+                <h1 className="text-2xl mb-4">{currentUser.userName}&apos;s Wishlist</h1>
                 <Image
                     src={data?.image}
                     alt={data?.plantName}
