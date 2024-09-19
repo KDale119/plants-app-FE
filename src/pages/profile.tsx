@@ -65,7 +65,7 @@ export default function Profile() {
                 </Button>
                 <ul>
                     {quizList?.map(data => {
-                       return <li><Link href={`/quiz-details?quizId=${data.quiz.quizId}`}>Quiz {data.quiz.quizId} results</Link></li>
+                       return <li key={data.quiz.quizId}><Link href={`/quiz-details?quizId=${data.quiz.quizId}`}>Quiz {data.quiz.quizId} results</Link></li>
                     })}
                 </ul>
             </div>
