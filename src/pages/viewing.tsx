@@ -9,13 +9,11 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector } from "@/state/store";
 import { selectCurrentUser } from "@/state/user.reducer";
 import { Wishlist } from "@/models/wishlist.model";
-import dynamic from "next/dynamic";
 import Comments from "@/components/comments";
 import {useSearchParams} from "next/navigation";
+import MapComponent from "@/components/map";
 
-const MapComponent = dynamic(() => import('../components/map'), {
-    ssr: false
-});
+
 
 export default function Viewing() {
     const currentUser = useAppSelector(selectCurrentUser);
@@ -23,7 +21,6 @@ export default function Viewing() {
     const { apiId } = router.query as unknown as { apiId: number };
     const [isInWishlist, setIsInWishlist] = useState(false);
     const [wishlist, setWishlist] = useState<Wishlist[]>([]);
-    const [itemId, setItemId] = useState<number | null>(null);
 
     const getPlantByApiId = async () => {
         const resp: AxiosResponse<Plant> = await axios.get(`http://18.188.80.135:8080/api/plants/external/${apiId}`);
@@ -43,15 +40,19 @@ export default function Viewing() {
                     const response = await axios.get(`http://18.188.80.135:8080/api/wishlist/${currentUser.userEmail}`);
                     const wishlist = response.data;
                     setWishlist(wishlist);
+                    console.log(wishlist)
 
-                    const item = wishlist.find((item: { id: number | undefined; }) => item.id === Number(searchParams.get('apiId')));
+                    wishlist.forEach((item: { apiId: any}) => {
+                        const wishListApiId = item.apiId
+                        console.log(wishListApiId)
+                        console.log(apiId)
+                        console.log(data?.apiId)
 
-                    if (item) {
-                        setItemId(item.id);
-                        setIsInWishlist(true);
-                    } else {
-                        setIsInWishlist(false)
-                    }
+
+                        if (wishListApiId === data?.apiId) {
+                            setIsInWishlist(true);
+                        }
+                    });
                 }
             } catch (error) {
                 console.error('Error fetching wishlist:', error);
