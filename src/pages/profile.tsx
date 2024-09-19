@@ -1,17 +1,33 @@
-import {useAppSelector} from "@/state/store";
+import {useAppDispatch, useAppSelector} from "@/state/store";
 import {selectCurrentUser} from "@/state/user.reducer";
 import {Button, Link} from "@nextui-org/react";
 import UpdateProfileModal from "@/components/update-profile-modal";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import UpdatePasswordModal from "@/components/update-password-modal";
 import {useRouter} from "next/router";
+import {getQuizById, getQuizByUsername} from "@/state/quiz.reducer";
 
 export default function Profile() {
     const router = useRouter();
-
+    const dispatch = useAppDispatch();
     const currentUser = useAppSelector(selectCurrentUser);
     const [openUpdateProfile, setOpenUpdateProfile] = useState(false);
     const [openUpdatePassword, setOpenUpdatePassword] = useState(false);
+    const [quizList, setQuizList] = useState()
+
+    useEffect(() => {(async () => {
+        if (currentUser) {
+            let response = null;
+            try {
+                response = await dispatch(getQuizByUsername(currentUser.userName));
+                if(response.payload?.status === 200){
+                    setQuizList(response.payload.data);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    })()}, [currentUser]);
 
     const passingEmail = (d: any) => {
         router.push({
@@ -47,6 +63,11 @@ export default function Profile() {
                 <Button color="primary" className="m-4" onClick={() => router.push('/quiz')}>
                     Take our quiz
                 </Button>
+                <ul>
+                    {quizList?.map(data => {
+                       return <li><Link href={`/quiz-details?quizId=${data.quiz.quizId}`}>Quiz {data.quiz.quizId} results</Link></li>
+                    })}
+                </ul>
             </div>
         </div>
     );
