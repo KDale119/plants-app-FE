@@ -13,7 +13,7 @@ export default function Profile() {
     const currentUser = useAppSelector(selectCurrentUser);
     const [openUpdateProfile, setOpenUpdateProfile] = useState(false);
     const [openUpdatePassword, setOpenUpdatePassword] = useState(false);
-    const [quizList, setQuizList] = useState()
+    const [quizList, setQuizList] = useState<[]>()
 
     useEffect(() => {(async () => {
         if (currentUser) {
@@ -64,7 +64,7 @@ export default function Profile() {
                     Take our quiz
                 </Button>
                 <ul>
-                    {quizList?.map(data => {
+                    {quizList?.map((data: any) => {
                        return <li key={data.quiz.quizId}><Link href={`/quiz-details?quizId=${data.quiz.quizId}`}>Quiz {data.quiz.quizId} results</Link></li>
                     })}
                 </ul>
